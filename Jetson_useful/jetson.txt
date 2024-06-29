@@ -1,0 +1,38 @@
+VNC打开 
+/usr/lib/vino/vino-server --display=:0
+设置分辨率
+xrandr --fb 1024x768
+
+打开摄像头 测试
+DISPLAY=:0.0 gst-launch-1.0 nvarguscamerasrc ! 'video/x-raw(memory:NVMM), width=3280, height=2464, format=(string)NV12, framerate=(fraction)20/1' ! nvoverlaysink -e
+打开摄像头
+nvgstcapture-1.0
+翻转180°
+nvgstcapture-1.0 --orientation 2
+
+启动pycharm
+./pycharm.sh
+
+风扇
+sudo sh -c 'echo 100 > /sys/devices/pwm-fan/target_pwm'
+
+启动虚拟环境
+workon opencv_cuda 
+解除虚拟环境
+deactivate
+
+开启观察
+jtop
+
+快捷查询
+# 检查 Torch 版本
+python3 -c "import torch; print(torch.__version__)"
+
+# 检查 TorchVision 版本
+python3 -c "import torchvision; print(torchvision.__version__)"
+
+查看摄像头指令
+ls /dev/video*
+
+镜像备份
+sudo dd if=/dev/mmcblk0p2 conv=sync,noerror bs=4M status=progress | gzip -c >  ~/backup_image.img.gz

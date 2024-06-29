@@ -1,0 +1,54 @@
+看起来你的系统中没有 `jetson_stats.service` 单元文件。`jetson_stats` 是一个用于监控 Jetson 设备状态的工具集，但它不一定默认安装在所有 Jetson 设备上。可以尝试以下步骤来解决这个问题：
+
+1. **安装 `jetson_stats` 工具：**
+   
+   你可以从 PyPI 安装 `jetson_stats`：
+
+   ```sh
+   sudo -H pip3 install -U jetson-stats
+   ```
+
+2. **启用并启动 `jetson_stats` 服务：**
+
+   安装完 `jetson_stats` 之后，你可以通过以下命令来启动和启用服务：
+
+   ```sh
+   sudo systemctl enable jetson_stats.service
+   sudo systemctl start jetson_stats.service
+   ```
+
+   如果遇到 `jetson_stats.service` 文件不存在的问题，可以手动创建并配置该服务。以下是一个示例服务文件内容：
+
+   ```sh
+   sudo nano /etc/systemd/system/jetson_stats.service
+   ```
+
+   在文件中添加以下内容：
+
+   ```ini
+   [Unit]
+   Description=Jetson Stats Monitoring Service
+
+   [Service]
+   ExecStart=/usr/local/bin/jetson_stats
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   保存文件并退出编辑器（`Ctrl+X` 然后按 `Y`，再按 `Enter`）。
+
+3. **重新加载 systemd 配置：**
+
+   ```sh
+   sudo systemctl daemon-reload
+   ```
+
+4. **再次尝试启动服务：**
+
+   ```sh
+   sudo systemctl start jetson_stats.service
+   sudo systemctl enable jetson_stats.service
+   ```
+
+这样，`jetson_stats` 服务应该可以正常启动并运行。

@@ -1,0 +1,50 @@
+在 Jetson Nano 上，`nvcc` 是 NVIDIA CUDA 编译器驱动程序。要正确配置它的路径，你需要确保 CUDA 工具包的路径已添加到系统的 `PATH` 环境变量中。以下是如何执行此操作的步骤：
+
+1. **找到 CUDA 安装目录：**
+
+   在 Jetson Nano 上，CUDA 通常安装在 `/usr/local/cuda` 目录中。你可以通过以下命令验证 `nvcc` 的路径：
+
+   ```sh
+   which nvcc
+   ```
+
+   这应该返回类似于 `/usr/local/cuda/bin/nvcc` 的路径。
+
+2. **添加 CUDA 路径到 `.bashrc` 文件：**
+
+   打开用户主目录下的 `.bashrc` 文件：
+
+   ```sh
+   nano ~/.bashrc
+   ```
+
+3. **在 `.bashrc` 文件中添加以下行：**
+
+   ```sh
+   export PATH=/usr/local/cuda/bin:$PATH
+   export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+   ```
+
+4. **保存文件并退出编辑器：**
+
+   按 `Ctrl+X`，然后按 `Y`，最后按 `Enter` 保存并退出编辑器。
+
+5. **重新加载 `.bashrc` 文件：**
+
+   通过以下命令使更改生效：
+
+   ```sh
+   source ~/.bashrc
+   ```
+
+6. **验证 `nvcc` 是否正确配置：**
+
+   再次运行以下命令以确认 `nvcc` 可以正常工作：
+
+   ```sh
+   nvcc -V
+   ```
+
+   这应该返回 CUDA 编译器驱动程序的版本信息。
+
+通过上述步骤，你应该能够成功配置并验证 `nvcc` 的路径，使其在 Jetson Nano 上正常工作。

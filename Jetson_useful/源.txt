@@ -1,0 +1,41 @@
+清华源
+-i https://pypi.tuna.tsinghua.edu.cn/simple
+
+#-o Acquire::https::DlUri=https://mirrors.tuna.tsinghua.edu.cn
+
+
+源地址
+sudo nano /etc/apt/sources.list
+加上
+deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib
+进入
+sudo nano /etc/apt/sources.list.d/raspi.list
+替换加上
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+
+pinout查看引脚
+
+查看网络接口
+arp -a
+
+原来
+deb http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi
+镜像
+deb https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main contrib non-free rpi
+
+启动jupyter  csdn上自启动
+jupyter lab
+
+摄像头检查
+sudo raspi-config
+raspistill -o myphoto.jpg
+vcgencmd get_camera
+打开摄像头
+sudo libcamera-hello -t 0
+
+激活虚拟环境
+source venv/bin/activate
+创建虚拟环境
+python3 -m venv venv
+
